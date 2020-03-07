@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import slugify from 'slugify';
 import './App.css';
 import Features from './Features'
+import Customizer from './Customizer'
+import ListItem from './ListItem'
 
 // This object will allow us to
 // easily convert numbers into US dollar values
@@ -59,21 +61,19 @@ class App extends Component {
               checked={item.name === this.state.selected[feature].name}
               onChange={e => this.updateFeature(feature, item)}
             />
-            <label htmlFor={itemHash} className="feature__label">
+            <label htmlFor={itemHash} className="feature__label" item={item.name}>
               {item.name} ({USCurrencyFormat.format(item.cost)})
             </label>
           </div>
         );
       });
-  console.log(`options is ${options}`)
 
-
-      return (
+      return (   
         <fieldset className="feature" key={featureHash}>
           <legend className="feature__name">
             <h3>{feature}</h3>
-          </legend>
-          {options}
+          </legend>    
+            {options} 
         </fieldset>
       );
     });
@@ -82,7 +82,7 @@ class App extends Component {
       const featureHash = feature + '-' + idx;
       const selectedOption = this.state.selected[feature];
 
-      return (
+      return (     
         <div className="summary__option" key={featureHash}>
           <div className="summary__option__label">{feature} </div>
           <div className="summary__option__value">{selectedOption.name}</div>
